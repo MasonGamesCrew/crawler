@@ -23,7 +23,11 @@ func _fixed_process(delta):
 	if (Input.is_action_pressed("move_right")):
 		motion += Vector2(1, 0)
 	
-	motion = motion.normalized()*MOTION_SPEED*delta
+	var thisSpeed = MOTION_SPEED
+	if (Input.is_action_pressed("run")):
+		thisSpeed *= 2
+		
+	motion = motion.normalized()*thisSpeed*delta
 	motion = move(motion)
 	
 	# Make character slide nicely through the world
